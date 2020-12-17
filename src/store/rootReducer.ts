@@ -1,12 +1,7 @@
 import { combineReducers } from '@reduxjs/toolkit'
-import taskReducer from './reducers/taskSlice'
-import cameraReducer from './reducers/cameraSlice'
-import locationReducer from './reducers/locationSlice'
-
+import streamReducer from './reducers/streamSlice'
 const rootReducer = combineReducers({
-  tasks: taskReducer,
-  cameras: cameraReducer,
-  locations: locationReducer,
+  stream: streamReducer,
 })
 
 export type RootState = ReturnType<typeof rootReducer>
