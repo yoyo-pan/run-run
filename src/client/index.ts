@@ -12,30 +12,25 @@ export const client = AgoraRTC.createClient({
   codec: 'h264',
 })
 
-// Handle errors.
-let handleError = function (err: any) {
-  console.log('Error: ', err)
-}
-
 export const initClient = (appId: string) => {
   return Promise.race([
-    new Promise(resolve => client.init(appId, () => resolve('ok'))),
+    new Promise((resolve, reject) => client.init(appId, () => resolve('ok'), reject)),
     new Promise((_, reject) => setTimeout(reject, 10 * 1000)),
   ])
 }
 
 export const joinChannel = (uid: string, channel: string) => {
   return Promise.race([
-    new Promise(resolve => client.join(TEMP_TOKEN, channel, uid, undefined, uid => resolve(uid))),
+    new Promise((resolve, reject) => client.join(TEMP_TOKEN, channel, uid, undefined, uid => resolve(uid), reject)),
     new Promise((_, reject) => setTimeout(reject, 10 * 1000)),
   ])
 }
 
 export const publishStream = () => {
   return Promise.race([
-    new Promise(resolve => {
+    new Promise((resolve, reject) => {
       localStream.init(() => {
-        client.publish(localStream, handleError)
+        client.publish(localStream, reject)
         resolve('ok')
       })
     }),

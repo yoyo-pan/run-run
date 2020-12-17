@@ -1,4 +1,4 @@
-import { Provider, useDispatch, useSelector } from 'react-redux'
+import { Provider, useSelector } from 'react-redux'
 import { useCallback, useEffect, useState } from 'react'
 import store from './store/store'
 
@@ -24,6 +24,11 @@ function App() {
       const stream = evt.stream
       setStreams(prev => [...prev, stream])
     })
+
+    // Remove the stream when the user leaves
+    client.on('peer-leave', function ({ uid }) {
+      setStreams(prev => prev.filter(s => s.getId() !== uid))
+    })
   }, [])
 
   const onJoin = useCallback(async (values: any) => {
@@ -38,10 +43,8 @@ function App() {
       <VideoForm onReady={onJoin} />
       {isPlaying && (
         <>
-          <h1 style={{ textAlign: 'center' }}>You</h1>
-          <Row justify="center">
-            <Player stream={mainStream} />)
-          </Row>
+          <h1>You</h1>
+          <Player stream={mainStream} />
         </>
       )}
       <Row gutter={[16, 16]}>

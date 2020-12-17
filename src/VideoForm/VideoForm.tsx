@@ -16,7 +16,7 @@ interface Props {
 
 export default function VideoForm({ onReady }: Props) {
   const onFinish = useCallback(
-    async values => {
+    values => {
       // Do some validation here
       onReady(values)
     },
