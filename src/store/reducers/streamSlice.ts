@@ -13,10 +13,17 @@ const StreamSlice = createSlice({
   name: 'stream',
   initialState,
   reducers: {
-    addStream() {},
+    login(state, action: PayloadAction<any>) {
+      // Some reducer stuff
+      console.log(state, action)
+    },
+    loginSucceed(state, action: PayloadAction<any>) {
+      // Some reducer stuff
+      console.log(state, action)
+    },
   },
 })
 
-export const { addStream } = StreamSlice.actions
+export const { login, loginSucceed } = StreamSlice.actions
 
 export default StreamSlice.reducer

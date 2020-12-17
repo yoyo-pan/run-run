@@ -1,7 +1,7 @@
 import { Subject } from 'rxjs'
 import { AjaxRequest, ajax, AjaxError } from 'rxjs/ajax'
 
-const API_URL = 'http://13.70.2.223:8000/'
+const API_URL = 'http://localhost:8000/'
 
 export const EMPTY_ACTION = {
   type: 'Empty',

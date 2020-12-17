@@ -1,5 +1,8 @@
 import { combineEpics } from 'redux-observable'
+import loginEpic from './epics/loginEpic'
 
-const rootEpic = combineEpics()
+const streamEpics = [loginEpic]
+
+const rootEpic = combineEpics(...streamEpics)
 
 export default rootEpic
